@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Catalog from './components/Catalog';
+import CatalogPage from './components/CatalogPage';
 import items from './constants/Products';
 
 class App extends Component {
     render() {
         return (
             <div>
-                <Catalog items={items} />
+                <CatalogPage items={items} />
             </div>
         )
     }
