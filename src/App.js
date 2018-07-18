@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import ProductCard from './components/ProductCard';
+import Catalog from './components/Catalog';
 import items from './constants/Products';
 
 class App extends Component {
     render() {
         return (
             <div>
-                <ProductCard item={items[0]} />
-                <ProductCard item={items[1]} />
-                <ProductCard item={items[2]} />
+                <Catalog items={items} />
             </div>
         )
     }
