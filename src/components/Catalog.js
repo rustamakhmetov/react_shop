@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { uniqueId } from 'lodash';
 import ProductCard from './ProductCard';
 
 class Catalog extends Component {
@@ -9,7 +8,7 @@ class Catalog extends Component {
             <ul>
                 {
                     items.map(item => (
-                        <li key={uniqueId()}>
+                        <li key={`productCard-${item.id}`}>
                             <ProductCard item={item} />
                         </li>
                     ))
