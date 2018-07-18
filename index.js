@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import TextBox from './src/components/TextBox';
+import App from './src/App';
 
 
 ReactDOM.render(
-    <TextBox>String example</TextBox>,
+    <App/>,
     document.getElementById('root')
 );
