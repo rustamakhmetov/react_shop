@@ -2,9 +2,12 @@
   "name": "first_app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --config webpack.config.js --mode production",
+    "watch": "webpack --watch --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +15,17 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-react": "^6.24.1",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.21.0"
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
@@ -20,6 +33,17 @@
     "lodash": "^4.17.10",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "^0.1.0-11",
+    "file-loader": "^1.1.11",
+    "font-awesome": "^4.7.0",
+    "node-sass": "^4.9.2",
+    "prop-types": "^15.6.2",
+    "react-fontawesome": "^1.6.1",
+    "sass-loader": "^7.0.3"
   }
 }
