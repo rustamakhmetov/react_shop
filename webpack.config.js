@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: './index.js',
+    entry: './src/index.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist')
@@ -13,7 +14,11 @@ module.exports = {
         hot: true
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./index.html"
+        })
     ],
     module: {
         rules: [
@@ -42,6 +47,14 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    }
+                ]
             }
         ]
     },
