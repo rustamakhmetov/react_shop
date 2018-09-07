@@ -1,31 +1,31 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { reduce } from 'lodash';
+import { ProductsInCart } from './CatalogPage';
 
 class Cart extends Component {
-    constructor(props){
-        super(props);
-        this.state = { count: this.props.count }
-    }
 
-    render() {
-        const { count } = this.state;
-        return (
-            <div>
-                <span>{ count }</span>
-                <FontAwesomeIcon icon={ faShoppingCart }  size="3x"/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <ProductsInCart.Consumer>
+          {
+            productsInCart => {
+              return (
+                <span>
+                  {reduce(productsInCart, function (acc, item) {
+                    return acc + item.quantity
+                  }, 0)}
+                </span>
+              )
+            }
+          }
+        </ProductsInCart.Consumer>
+        <FontAwesomeIcon icon={faShoppingCart} size="3x"/>
+      </div>
+    )
+  }
 }
-
-Cart.defaultProps = {
-    count: 0
-};
-
-Cart.propTypes = {
-    count: PropTypes.number,
-};
 
 export default Cart;
