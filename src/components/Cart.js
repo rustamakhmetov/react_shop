@@ -2,26 +2,24 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { reduce } from 'lodash';
-import { ProductsInCart } from './CatalogPage';
+import { CartManager } from './CatalogPage';
 
 class Cart extends Component {
 
   render() {
     return (
       <div>
-        <ProductsInCart.Consumer>
+        <CartManager.Consumer>
           {
-            productsInCart => {
+            ({getCountProductsInCart}) => {
               return (
                 <span>
-                  {reduce(productsInCart, function (acc, item) {
-                    return acc + item.quantity
-                  }, 0)}
+                  {getCountProductsInCart()}
                 </span>
               )
             }
           }
-        </ProductsInCart.Consumer>
+        </CartManager.Consumer>
         <FontAwesomeIcon icon={faShoppingCart} size="3x"/>
       </div>
     )

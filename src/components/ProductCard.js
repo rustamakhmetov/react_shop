@@ -16,14 +16,16 @@ class ProductCard extends Component {
           {item.title}
         </TextBox>
         <Image src={item.imageUrl} width='100' height='100' alt={item.title}/>
-        <Price price={item.price} label/>
+        <Price label>
+          {item.price}
+        </Price>
         <CartManager.Consumer>
           {
-            toCart => {
+            ({addToCart}) => {
               return (
                 <Button
                   color='success'
-                  onClick={(e) => toCart(e, item.id)}
+                  onClick={(e) => addToCart(item)}
                 >
                   <span>В корзину</span>
                   <FontAwesomeIcon icon={ faCartPlus }  size="1x"/>

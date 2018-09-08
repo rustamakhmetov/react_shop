@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
-import { ProductsInCart } from './CatalogPage';
+import { CartManager } from './CatalogPage';
 import Price from './Price';
 
 class CartForm extends Component {
@@ -18,27 +18,31 @@ class CartForm extends Component {
           </tr>
           </thead>
           <tbody>
-          <ProductsInCart.Consumer>
+          <CartManager.Consumer>
             {
-              productsInCart => {
+              ({getProducts}) => {
                 return (
-                  productsInCart.map((product, i) =>
+                  getProducts().map((product, i) =>
                     <tr key={`productInCart-${product.id}`}>
                       <td>{i + 1}</td>
                       <td>{product.title}</td>
                       <td>
-                        <Price price={product.price} />
+                        <Price>
+                          {product.price}
+                        </Price>
                       </td>
                       <td>{product.quantity}</td>
                       <td>
-                        <Price price={product.price * product.quantity} />
+                        <Price>
+                          {product.price * product.quantity}
+                        </Price>
                       </td>
                     </tr>
                   )
                 )
               }
             }
-          </ProductsInCart.Consumer>
+          </CartManager.Consumer>
           </tbody>
         </Table>
       </div>

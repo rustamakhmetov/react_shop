@@ -1,42 +1,54 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Catalog from './Catalog';
 import CartForm from './CartForm';
-import {bind, merge, find} from 'lodash';
+import {bind, reduce} from 'lodash';
+import products from '../constants/Products';
 
-export const ProductsInCart = React.createContext([]);
 export const CartManager = React.createContext();
 
 class CatalogPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: props.items,
-      productsInCart: []
+      products: products,
+      cart: {items: []},
     };
-    this.toCart = bind(this.toCart, this);
+    this.addToCart = bind(this.addToCart, this);
+    this.getProducts = bind(this.getProducts, this);
+    this.getCountProductsInCart = bind(this.getCountProductsInCart, this);
   }
 
-  toCart(e, id) {
-    const {items} = this.props;
-    const {productsInCart} = this.state;
-    let elemId = productsInCart.findIndex((elem, index, arr) => elem.id === id);
+  getProducts() {
+    return this.state.cart.items;
+  }
+
+  getCountProductsInCart() {
+    return reduce(this.getProducts(), (acc, item) => acc + item.quantity, 0)
+  }
+
+  addToCart(product) {
+    const { cart: {items} } = this.state;
+    let elemId = items.findIndex((elem, index, arr) => elem.id === product.id);
     if (elemId === -1) {
-      let newProduct = find(items, {id});
-      productsInCart.push(merge(newProduct, {quantity: 1}));
+      items.push(Object.assign({quantity: 1}, product));
     } else {
-      productsInCart[elemId].quantity++;
+      items[elemId].quantity++;
     }
-    this.setState({productsInCart: productsInCart})
+    this.setState({ cart: {items: items} })
   }
 
   render() {
     return (
-      <ProductsInCart.Provider value={this.state.productsInCart}>
-        <CartManager.Provider value={this.toCart}>
-          <Catalog items={this.state.items}/>
-          <CartForm/>
-        </CartManager.Provider>
-      </ProductsInCart.Provider>
+      <CartManager.Provider value={
+        {
+          addToCart: this.addToCart,
+          getProducts: this.getProducts,
+          getCountProductsInCart: this.getCountProductsInCart
+        }
+      }>
+        <Catalog items={this.state.products}/>
+        <CartForm/>
+      </CartManager.Provider>
     )
   }
 }
