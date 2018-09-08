@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import Image from './Image';
 import TextBox from './TextBox';
 import Price from './Price';
-import { Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { CartManager } from './CatalogPage';
+import AddToCartButton from './AddToCartButton';
 
 class ProductCard extends Component {
   render() {
@@ -19,21 +16,7 @@ class ProductCard extends Component {
         <Price label>
           {item.price}
         </Price>
-        <CartManager.Consumer>
-          {
-            ({addToCart}) => {
-              return (
-                <Button
-                  color='success'
-                  onClick={(e) => addToCart(item)}
-                >
-                  <span>В корзину</span>
-                  <FontAwesomeIcon icon={ faCartPlus }  size="1x"/>
-                </Button>
-              )
-            }
-          }
-        </CartManager.Consumer>
+        <AddToCartButton product={item} />
       </div>
     )
   }
