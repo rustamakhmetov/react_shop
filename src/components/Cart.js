@@ -11,13 +11,10 @@ class Cart extends Component {
       <div>
         <CartManager.Consumer>
           {
-            ({getCountProductsInCart}) => {
-              return (
-                <span>
-                  {getCountProductsInCart()}
-                </span>
-              )
-            }
+            ({getCountProductsInCart}) =>
+              <span>
+                {getCountProductsInCart()}
+              </span>
           }
         </CartManager.Consumer>
         <FontAwesomeIcon icon={faShoppingCart} size="3x"/>
