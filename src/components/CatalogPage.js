@@ -26,13 +26,13 @@ class CatalogPage extends Component {
     return reduce(this.getProducts(), (acc, item) => acc + item.quantity, 0)
   }
 
-  addToCart(product) {
+  addToCart(product, quantity=1) {
     const { cart: {items} } = this.state;
     let elemId = items.findIndex((elem, index, arr) => elem.id === product.id);
     if (elemId === -1) {
-      items.push(Object.assign({quantity: 1}, product));
+      items.push(Object.assign({quantity: quantity}, product));
     } else {
-      items[elemId].quantity++;
+      items[elemId].quantity += quantity;
     }
     this.setState({ cart: {items: items} })
   }

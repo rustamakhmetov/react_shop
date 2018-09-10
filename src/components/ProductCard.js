@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Image from './Image';
 import TextBox from './TextBox';
 import Price from './Price';
-import AddToCartButton from './AddToCartButton';
+import AddToCartForm from './AddToCartForm';
 
 class ProductCard extends Component {
   render() {
@@ -16,7 +16,7 @@ class ProductCard extends Component {
         <Price label>
           {item.price}
         </Price>
-        <AddToCartButton product={item} />
+        <AddToCartForm product={item} />
       </div>
     )
   }
